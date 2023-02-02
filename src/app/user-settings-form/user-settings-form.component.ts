@@ -10,8 +10,8 @@ export class UserSettingsFormComponent {
   userSettings: UserSettings = {
     name: 'Marcos',
     emailOffers: false,
-    interfaceStyle: 'dark',
-    suscriptionType: 'Annual',
+    interfaceStyle: 'Dark',
+    suscriptionType: '1',
     notes: 'Here are some notes...'
   };
 }
