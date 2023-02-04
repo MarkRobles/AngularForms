@@ -8,11 +8,11 @@ import { UserSettings } from '../data/user-settings';
 })
 export class UserSettingsFormComponent {
   originalUserSettings: UserSettings = {
-    name: 'Marcos',
+    name: '',
     emailOffers: false,
-    interfaceStyle: 'Dark',
-    suscriptionType: '1',
-    notes: 'Here are some notes...'
+    interfaceStyle: '',
+    suscriptionType: '',
+    notes: ''
   };
 
   userSettings: UserSettings = { ...this.originalUserSettings };//Use spread operator to copy values from originalUserSettings, so you always work with a copy of the form values and avoid lost the original if the user press back or cancel button
