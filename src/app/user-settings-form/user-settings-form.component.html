@@ -5,6 +5,7 @@
             <label for="name">Name</label>
             <input id="name" name="name"  required class="form-control" [(ngModel)]="userSettings.name"
             pattern="[a-zA-Z]+" minlength="3" maxlength="50" #nameField="ngModel" 
+            (blur)="onBlur(nameField)"
             [class.field-error]="form.submitted && nameField.invalid">
             <div [hidden]="!form.submitted || nameField.valid"
              class="alert alert-danger">
