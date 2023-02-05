@@ -1,6 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { NgForm, NgModel} from '@angular/forms';
+import { DataService } from '../data/data.service';
 import { UserSettings } from '../data/user-settings';
 
 @Component({
@@ -9,6 +10,9 @@ import { UserSettings } from '../data/user-settings';
   styleUrls: ['./user-settings-form.component.css']
 })
 export class UserSettingsFormComponent {
+  constructor(private dataService:DataService) {
+    
+  }
   originalUserSettings: UserSettings = {
     name: '',
     emailOffers: false,
@@ -21,7 +25,11 @@ export class UserSettingsFormComponent {
   //This is used to make a copy of top level properties, if you want a deep copy (objest within objects). You could use Lodash.deepclone
 
   onSubmit(form: NgForm) { 
-    console.log('in onSubmit:',form.valid);
+    console.log('in onSubmit:', form.valid);
+    this.dataService.postUserSettingsForm(this.userSettings).subscribe(
+      result => console.log("Success: ", result),
+      error => console.log("Error: ",error)
+    );
 
   }
 
