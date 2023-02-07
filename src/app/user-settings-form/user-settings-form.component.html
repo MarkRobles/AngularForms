@@ -50,9 +50,10 @@ Enter a name
           <div class="form-group">
             <label for="suscriptionType">Suscription Type</label>
             <select class="form-select" aria-label="Default select example" id="suscriptionType" name="suscriptionType" [(ngModel)]="userSettings.suscriptionType">          
-                <option value="1">Monthly</option>
-                <option value="2">Annual</option>
-                <option value="3">Lifetime</option>
+                <option *ngFor="let type of subscriptionTypes | async">
+                  {{type}}
+                </option>
+             
               </select>
           </div>
           <div class="form-group">

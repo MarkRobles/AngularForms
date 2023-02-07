@@ -1,6 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { NgForm, NgModel} from '@angular/forms';
+import { Observable } from 'rxjs';
 import { DataService } from '../data/data.service';
 import { UserSettings } from '../data/user-settings';
 
@@ -25,6 +26,12 @@ export class UserSettingsFormComponent {
   //This is used to make a copy of top level properties, if you want a deep copy (objest within objects). You could use Lodash.deepclone
   postError = false;
   postErrorMessage = '';
+  subscriptionTypes : Observable<string[]> | undefined;
+
+  ngOnInit() { 
+    this.subscriptionTypes=this.dataService.getSubscriptionTypes();
+  }
+
 
   onHttpError(errorResponse: any) {
     console.log('error:', errorResponse);
