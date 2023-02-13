@@ -1,6 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { NgForm, NgModel} from '@angular/forms';
+import { Time } from 'ngx-bootstrap/timepicker/timepicker.models';
 import { Observable } from 'rxjs';
 import { DataService } from '../data/data.service';
 import { UserSettings } from '../data/user-settings';
@@ -21,6 +22,12 @@ export class UserSettingsFormComponent {
     suscriptionType: '',
     notes: ''
   };
+  singleModel = "On";
+  startDate: Date | undefined;
+  startTime:Time | undefined;
+  userRating: 0 | undefined;
+  maxRating: 10 = 10;
+  isReadonly = false;
 
   userSettings: UserSettings = { ...this.originalUserSettings };//Use spread operator to copy values from originalUserSettings, so you always work with a copy of the form values and avoid lost the original if the user press back or cancel button
   //This is used to make a copy of top level properties, if you want a deep copy (objest within objects). You could use Lodash.deepclone
@@ -29,7 +36,8 @@ export class UserSettingsFormComponent {
   subscriptionTypes : Observable<string[]> | undefined;
 
   ngOnInit() { 
-    this.subscriptionTypes=this.dataService.getSubscriptionTypes();
+    this.subscriptionTypes = this.dataService.getSubscriptionTypes();
+    this.startDate = new Date();
   }
 
 
@@ -42,18 +50,18 @@ export class UserSettingsFormComponent {
   onSubmit(form: NgForm) { 
     console.log('in onSubmit:', form.valid);
     console.log('data:', form.value);
-    if (form.valid) {
+    // if (form.valid) {
 
       
-      this.dataService.postUserSettingsForm(this.userSettings).subscribe(
-        result => console.log("Success: ", result),
-        error => this.onHttpError(error)
-        // error => console.log("Error: ",error)
-      );
-    } else { 
-      this.postError = true;
-      this.postErrorMessage ="Please fix the above errors";
-    }
+    //   this.dataService.postUserSettingsForm(this.userSettings).subscribe(
+    //     result => console.log("Success: ", result),
+    //     error => this.onHttpError(error)
+    //     // error => console.log("Error: ",error)
+    //   );
+    // } else { 
+    //   this.postError = true;
+    //   this.postErrorMessage ="Please fix the above errors";
+    // }
 
 
   }
